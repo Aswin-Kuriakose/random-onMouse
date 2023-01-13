@@ -1,48 +1,38 @@
 myCanvas = document.getElementById("my-canvas")
 let context = myCanvas.getContext("2d")
-let viewWidth = window.innerHeight
-let viewHeight = window.innerHeight
-let viewCanvasX = myCanvas.width
-let viewCanvasY = myCanvas.height
-
-let mouseOnX = 0
-let mouseOnY = 0
-
-let random100 = Math.round(Math.random() * 30)
+    yCod = window.innerHeight,
+    xCod = window.innerHeight,
+    myCanvas.width = yCod
+    myCanvas.height = xCod
+    mouseOnX = 0,
+    mouseOnY = 0;
 
 addEventListener("mousemove", function (e) {
     mouseOnX = e.clientX
     mouseOnY = e.clientY
 })
 
+let rgbValue = Math.round(Math.random() * 250) + 50
+
+console.log(randomnColor())
 function randomnColor() {
     return (
-        "rgba(" +
-        Math.round(Math.random() * 250) +
-        "," +
-        Math.round(Math.random() * 250) +
-        "," +
-        Math.round(Math.random() * 250) +
-        "," +
-        Math.ceil(Math.random() * 10) / 10 +
-        ")"
+        `rgba( ${Math.round(Math.random() * 250) + 50} ,${Math.round(Math.random() * 250) + 50} , ${Math.round(Math.random() * 250) + 50} , ${Math.ceil(Math.random() * 10) + 1 / 10})`
 
     )
 }
-
 function randomnBall() {
+    let radius = Math.round(Math.random() * 15 + 5)
+    let randomX = Math.random() * (canvasWidth - radius)
+    let randomY = Math.random() * (canvasHeight - radius)
     context.beginPath()
-    context.arc(random100, random100, random100, 0, 2 * Math.PI)
-    context.fillstyle = randomnColor()
-    // context.lineWidh = 5
-    // context.strokeWidth = 5
-    context.strokeStyle = "#ffffff"
-    context.stroke()
+    context.arc(randomX, randomY, radius, 0, 2 * Math.PI)
+    context.fillStyle = randomnColor()
+    // context.stroke()
+    context.fill()
 }
 
 
-let balls = []
-for (let i = 0; i < 100; i++) {
-    balls.push(new randomnBall())
+for (let i = 0; i < 50; i++) {
+    randomnBall()
 }
-
