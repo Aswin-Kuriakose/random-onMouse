@@ -1,10 +1,10 @@
 myCanvas = document.getElementById("my-canvas")
 let context = myCanvas.getContext("2d")
     yCod = window.innerHeight,
-    xCod = window.innerHeight,
-    myCanvas.width = yCod
-    myCanvas.height = xCod
-    mouseOnX = 0,
+    xCod = window.innerWidth,
+    myCanvas.width = xCod
+    myCanvas.height = yCod
+let mouseOnX = 0,
     mouseOnY = 0;
 
 addEventListener("mousemove", function (e) {
@@ -23,8 +23,8 @@ function randomnColor() {
 }
 function randomnBall() {
     let radius = Math.round(Math.random() * 15 + 5)
-    let randomX = Math.random() * (canvasWidth - radius)
-    let randomY = Math.random() * (canvasHeight - radius)
+    let randomX = Math.random() * (xCod - radius * 2)
+    let randomY = Math.random() * (yCod - radius)
     context.beginPath()
     context.arc(randomX, randomY, radius, 0, 2 * Math.PI)
     context.fillStyle = randomnColor()
@@ -32,7 +32,21 @@ function randomnBall() {
     context.fill()
 }
 
-
+let ball = []
 for (let i = 0; i < 50; i++) {
-    randomnBall()
+    ball.push(randomnBall())
 }
+
+function animation() {
+    if (xCod !== window.innerWidth || yCod !== window.innerHeight) {
+        xCod = window.innerWidth
+        yCod = window.innerHeight
+        myCanvas.width = xCod
+        myCanvas.height = yCod
+    }
+    requestAnimationFrame(animation)
+    context.clearRect(0,0,tx,ty)
+
+}
+const timeDifference = new Date()
+
